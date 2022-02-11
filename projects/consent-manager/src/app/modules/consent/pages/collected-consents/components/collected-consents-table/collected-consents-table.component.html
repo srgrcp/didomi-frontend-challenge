@@ -1,0 +1,65 @@
+<table *ngIf="userConsentsStatus !== 'success'" class="w-full" mat-table [dataSource]="loadingData">
+
+  <ng-container matColumnDef="name">
+    <th class="!pl-4 !pr-2" mat-header-cell *matHeaderCellDef> Name </th>
+    <td class="!pl-4 !pr-2 whitespace-nowrap" mat-cell *matCellDef="let userConsent">
+      <ngx-skeleton-loader count="1" animation="progress-dark"></ngx-skeleton-loader>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th class="!px-2" mat-header-cell *matHeaderCellDef> Email </th>
+    <td class="!px-2" mat-cell *matCellDef="let userConsent">
+      <ngx-skeleton-loader count="1" animation="progress-dark"></ngx-skeleton-loader>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="consents">
+    <th class="!pr-4 !pl-2" mat-header-cell *matHeaderCellDef> Consents given for </th>
+    <td class="!pr-4 !pl-2" mat-cell *matCellDef="let userConsent">
+      <ngx-skeleton-loader count="1" animation="progress-dark"></ngx-skeleton-loader>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<table *ngIf="userConsentsStatus === 'success'" class="w-full" mat-table [dataSource]="userConsents || []">
+
+  <ng-container matColumnDef="name">
+    <th class="!pl-4 !pr-2" mat-header-cell *matHeaderCellDef> Name </th>
+    <td class="!pl-4 !pr-2 whitespace-nowrap" mat-cell *matCellDef="let userConsent">
+      {{userConsent.user.name}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th class="!px-2" mat-header-cell *matHeaderCellDef> Email </th>
+    <td class="!px-2" mat-cell *matCellDef="let userConsent">
+      {{userConsent.user.email}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="consents">
+    <th class="!pr-4 !pl-2" mat-header-cell *matHeaderCellDef> Consents given for </th>
+    <td class="!pr-4 !pl-2" mat-cell *matCellDef="let userConsent">
+      {{userConsent.givenConsentsText}}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[2]"
+  [pageSize]="userConsentsPagination?.perPage"
+  [pageIndex]="(userConsentsPagination?.page || 0) - 1"
+  [length]="userConsentsPagination?.total"
+  (page)="pageChanged($event)"
+  showFirstLastButtons
+  hidePageSize
+  aria-label="Select page"
+>
+</mat-paginator>

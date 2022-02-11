@@ -1,0 +1,31 @@
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { ConsentService } from "projects/consent-manager/src/app/core/services/consent.service";
+import { catchError, map, of, switchMap } from "rxjs";
+import { getUserConsents, getUserConsentsFailure, getUserConsentsSuccess, saveUserConsents, saveUserConsentsFailure, saveUserConsentsSuccess } from "./user-consents.actions";
+
+@Injectable()
+export class UserConsentEffects {
+
+  constructor(
+    private actions$: Actions,
+    private consentService: ConsentService,
+  ) {}
+
+  getUserConsents$ = createEffect(() => this.actions$.pipe(
+    ofType(getUserConsents),
+    switchMap(({ page, perPage }) => this.consentService.getUserConsents(page, perPage).pipe(
+      map(response => getUserConsentsSuccess({ userConsents: response.data.data, pagination: response.data.pagination })),
+      catchError(error => of(getUserConsentsFailure({ error })))
+    )),
+  ));
+
+  saveUserConsents$ = createEffect(() => this.actions$.pipe(
+    ofType(saveUserConsents),
+    switchMap(({ userConsents }) => this.consentService.saveUserConsents(userConsents).pipe(
+      map(() => saveUserConsentsSuccess()),
+      catchError(error => of(saveUserConsentsFailure({ error })))
+    )),
+  ));
+
+}

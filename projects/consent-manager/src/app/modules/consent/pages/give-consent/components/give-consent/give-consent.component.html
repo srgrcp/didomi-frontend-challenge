@@ -1,0 +1,6 @@
+<cm-give-consent-form
+  [consentOptions]="consentOptions$ | async"
+  [consentOptionsStatus]="consentOptionsStatus$ | async"
+  [userConsentStatus]="userConsentStatus$ | async"
+  (consentFormSubmit)="onConsentFormSubmit($event)"
+></cm-give-consent-form>

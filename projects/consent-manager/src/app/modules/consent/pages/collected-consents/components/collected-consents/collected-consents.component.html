@@ -1,0 +1,6 @@
+<cm-collected-consents-table
+  [userConsents]="userConsents$ | async"
+  [userConsentsPagination]="userConsentsPagination$ | async"
+  [userConsentsStatus]="userConsentsStatus$ | async"
+  (changePage)="getUserConsentsPage($event)"
+></cm-collected-consents-table>

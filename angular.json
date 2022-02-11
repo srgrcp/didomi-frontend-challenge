@@ -1,0 +1,175 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "yarn"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "consent-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/consent-manager",
+      "sourceRoot": "projects/consent-manager/src",
+      "prefix": "cm",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/consent-manager/browser",
+            "index": "projects/consent-manager/src/index.html",
+            "main": "projects/consent-manager/src/main.ts",
+            "polyfills": "projects/consent-manager/src/polyfills.ts",
+            "tsConfig": "projects/consent-manager/tsconfig.app.json",
+            "inlineStyleLanguage": "sass",
+            "assets": [
+              "projects/consent-manager/src/favicon.ico",
+              "projects/consent-manager/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "projects/consent-manager/src/styles.sass"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/consent-manager/src/environments/environment.ts",
+                  "with": "projects/consent-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "consent-manager:build:production"
+            },
+            "development": {
+              "browserTarget": "consent-manager:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "consent-manager:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/consent-manager/src/test.ts",
+            "polyfills": "projects/consent-manager/src/polyfills.ts",
+            "tsConfig": "projects/consent-manager/tsconfig.spec.json",
+            "karmaConfig": "projects/consent-manager/karma.conf.js",
+            "inlineStyleLanguage": "sass",
+            "assets": [
+              "projects/consent-manager/src/favicon.ico",
+              "projects/consent-manager/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "projects/consent-manager/src/styles.sass"
+            ],
+            "scripts": []
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/consent-manager/server",
+            "main": "projects/consent-manager/server.ts",
+            "tsConfig": "projects/consent-manager/tsconfig.server.json",
+            "inlineStyleLanguage": "sass"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "projects/consent-manager/src/environments/environment.ts",
+                  "with": "projects/consent-manager/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "consent-manager:build:development",
+              "serverTarget": "consent-manager:server:development"
+            },
+            "production": {
+              "browserTarget": "consent-manager:build:production",
+              "serverTarget": "consent-manager:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "consent-manager:build:production",
+              "serverTarget": "consent-manager:server:production"
+            },
+            "development": {
+              "browserTarget": "consent-manager:build:development",
+              "serverTarget": "consent-manager:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    }
+  },
+  "defaultProject": "consent-manager"
+}

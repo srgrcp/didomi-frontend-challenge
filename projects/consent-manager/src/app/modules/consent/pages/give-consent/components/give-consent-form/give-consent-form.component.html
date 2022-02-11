@@ -1,0 +1,38 @@
+<form [formGroup]="consentForm" (ngSubmit)="onConsentFormSubmit()">
+  <div class="w-full flex justify-center" formGroupName="user">
+    <div class="w-4/12 px-1">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput name="name" placeholder="Name" formControlName="name">
+      </mat-form-field>
+    </div>
+  
+    <div class="w-4/12 px-1">
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Email address</mat-label>
+        <input matInput name="email" placeholder="Placeholder" formControlName="email">
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="flex flex-col items-center">
+    <p class="!m-0">I agree to:</p>
+
+    <div *ngIf="consentOptionsStatus !== 'success'" class="flex flex-col my-6 w-60">
+      <ngx-skeleton-loader count="3" animation="progress-dark"></ngx-skeleton-loader>
+    </div>
+  
+    <div *ngIf="consentOptionsStatus === 'success'" class="flex flex-col my-6" formArrayName="givenConsents">
+      <div
+        *ngFor="let consentOption of consentOptionsGroups; let i = index"
+        [formGroup]="consentOption"
+      >
+        <mat-checkbox
+          formControlName="checked"
+        >{{ consentOption.value.description }}</mat-checkbox>
+      </div>
+    </div>
+  
+    <button mat-raised-button color="primary">Give consent</button>
+  </div>
+</form>
