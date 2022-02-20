@@ -3,7 +3,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import './app/fake-server/fake-server';
+// @ts-ignore
+import { startFakeServer } from './app/fake-server/fake-server';
 
 if (environment.production) {
   enableProdMode();
@@ -21,3 +22,4 @@ if (document.readyState === 'complete') {
   document.addEventListener('DOMContentLoaded', bootstrap);
 }
 
+startFakeServer();

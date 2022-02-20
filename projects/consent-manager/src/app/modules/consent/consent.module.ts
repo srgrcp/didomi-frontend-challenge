@@ -6,6 +6,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { ConsentStoreModule } from './store/consent-store.module';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ConsentStoreModule } from './store/consent-store.module';
     ConsentStoreModule,
     MatSidenavModule,
     MatButtonModule,
+    MatIconModule,
   ]
 })
 export class ConsentModule { }

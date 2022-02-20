@@ -1,5 +1,5 @@
 <mat-drawer-container>
-    <mat-drawer mode="side" opened>
+    <mat-drawer [mode]="(mode$ | async) || 'side'" [opened]="opened$ | async" (openedChange)="openChaned($event)">
         <div class="grid grid-cols-1 gap-3 p-3">
             <a routerLink="/give-consent" routerLinkActive="mat-accent" mat-raised-button>
                 Give Consent
@@ -12,7 +12,12 @@
     </mat-drawer>
 
     <mat-drawer-content>
-        <div class="py-10 flex justify-center">
+        <div class="py-12 flex justify-center relative">
+            <button class="!absolute top-0 left-0 md:!hidden" mat-icon-button (click)="toggle()">
+              <mat-icon>
+                  menu
+              </mat-icon>
+            </button>
             <div class="w-11/12 md:10/12 lg:w-9/12 xl:w-2/3">
                 <router-outlet></router-outlet>
             </div>
