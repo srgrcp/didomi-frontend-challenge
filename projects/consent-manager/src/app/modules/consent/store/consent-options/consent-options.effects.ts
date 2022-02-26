@@ -12,6 +12,11 @@ export class ConsentOptionsEffects {
     private consentService: ConsentService,
   ) {}
 
+  /**
+   * When the consent options request is dispatched,
+   * we dispatch this action to get the consent options
+   * from the consent service and update the consent options state.
+   */
   getConsentOptions$ = createEffect(() => this.actions$.pipe(
     ofType(getConsentOptions),
     switchMap(() => this.consentService.getConsentOptions().pipe(

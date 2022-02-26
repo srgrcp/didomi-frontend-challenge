@@ -13,8 +13,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     AppComponent
   ],
   imports: [
+    // Modularized state management.
+    // see app/modules/consent/store/
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+
+    // Global configuration for animated skeleton loaders.
     NgxSkeletonLoaderModule.forRoot({
       animation: 'progress-dark',
       theme: {

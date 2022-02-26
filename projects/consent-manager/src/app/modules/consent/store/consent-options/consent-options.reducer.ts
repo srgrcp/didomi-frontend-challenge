@@ -2,6 +2,9 @@ import { createReducer, on } from "@ngrx/store";
 import { ConsentOption } from "projects/consent-manager/src/app/core/models/consent";
 import { getConsentOptions, getConsentOptionsFailure, getConsentOptionsSuccess } from "./consent-options.actions";
 
+/**
+ * The consent options state.
+ */
 export interface ConsentOptionsState {
   consentOptions: ConsentOption[];
   status: 'idle' | 'loading' | 'success' | 'error';

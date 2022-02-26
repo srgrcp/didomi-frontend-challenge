@@ -23,9 +23,15 @@ export class CollectedConsentsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Get the first page of user consents.
     this.store.dispatch(getUserConsents({ page: 1, perPage: this.defaultPageSize }));
   }
 
+  /**
+   * When the user emits a change page event,
+   * get the user consents for the new page.
+   * @param event New page event.
+   */
   public getUserConsentsPage(event: ChangePageEvent): void {
     this.store.dispatch(getUserConsents(event));
   }

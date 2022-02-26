@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) { }
   
   ngOnInit(): void {
+    // Handle the change of the screen size.
     this.breakpointObserver.observe(this.mdBreakpoint).subscribe((res) => {
       if (this.sidenav) {
         if (res.matches) {
@@ -32,7 +33,7 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    // Set initial mode
+    // Set initial responsive mode.
     if (this.breakpointObserver.isMatched(this.mdBreakpoint)) {
       this.mode$.next('push');
       this.opened$.next(false);

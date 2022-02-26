@@ -1,5 +1,8 @@
 import { User } from "./user";
 
+/**
+ * A user with its given consents.
+ */
 export interface UserConsent {
     id?: string;
     user: User;
@@ -7,6 +10,9 @@ export interface UserConsent {
     givenConsentsText?: string;
 }
 
+/**
+ * A consent type.
+ */
 export interface ConsentOption {
     id: string | undefined;
     description: string;

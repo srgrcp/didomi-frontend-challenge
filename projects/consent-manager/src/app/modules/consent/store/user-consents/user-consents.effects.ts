@@ -12,6 +12,11 @@ export class UserConsentEffects {
     private consentService: ConsentService,
   ) {}
 
+  /**
+   * When the user consents page request is dispatched,
+   * we dispatch this action to get the user consents
+   * from the consent service and update the user consents state.
+   */
   getUserConsents$ = createEffect(() => this.actions$.pipe(
     ofType(getUserConsents),
     switchMap(({ page, perPage }) => this.consentService.getUserConsents(page, perPage).pipe(
@@ -20,6 +25,11 @@ export class UserConsentEffects {
     )),
   ));
 
+  /**
+   * When the user consent save request is dispatched,
+   * we dispatch this action to save the user consent
+   * to the consent service and update the user consents state.
+   */
   saveUserConsents$ = createEffect(() => this.actions$.pipe(
     ofType(saveUserConsents),
     switchMap(({ userConsents }) => this.consentService.saveUserConsents(userConsents).pipe(

@@ -13,7 +13,12 @@ export class CollectedConsentsTableComponent implements OnInit {
 
   @Input()
   userConsents: UserConsent[] | null | undefined;
+
+  /**
+   * Display an empty table to show loading skeleton animation.
+   */
   public loadingData: any[] = [{},{}];
+
   @Input()
   userConsentsPagination: Pagination | null | undefined;
   @Input()
@@ -28,6 +33,10 @@ export class CollectedConsentsTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Emit this event to get a new page of user consents when the user clicks on the paginator.
+   * @param event New page event.
+   */
   public pageChanged(event: PageEvent): void {
     this.changePage.emit({ page: event.pageIndex + 1, perPage: event.pageSize });
   }

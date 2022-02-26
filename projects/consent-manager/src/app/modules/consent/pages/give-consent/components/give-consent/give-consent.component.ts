@@ -23,9 +23,15 @@ export class GiveConsentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Get the consent types to display the options in the consent form.
     this.store.dispatch(getConsentOptions());
   }
 
+  /**
+   * When the user submits the consent form,
+   * save the user consents to the server.
+   * @param consentForm Form containing the user consent.
+   */
   public onConsentFormSubmit(consentForm: UserConsent): void {
     this.store.dispatch(saveUserConsents({ userConsents: consentForm }));
   }

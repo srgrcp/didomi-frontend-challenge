@@ -3,6 +3,9 @@ import { UserConsent } from "projects/consent-manager/src/app/core/models/consen
 import { Pagination } from "projects/consent-manager/src/app/core/models/paginated";
 import { getUserConsents, getUserConsentsFailure, getUserConsentsSuccess, saveUserConsents, saveUserConsentsFailure, saveUserConsentsSuccess } from "./user-consents.actions";
 
+/**
+ * Paginated user consents state.
+ */
 export interface UserConsentsState {
   userConsents: UserConsent[];
   pagination: Pagination | null;
@@ -17,6 +20,12 @@ export const initialState: UserConsentsState = {
   error: null,
 };
 
+/**
+ * Set `userConsent.givenConsentsText` with a formated string with
+ * the given consents separated by a comma.
+ * @param userConsent The user consent.
+ * @returns The user consent with the given consents text.
+ */
 function generateGivenConsentsText(userConsent: UserConsent): UserConsent {
   return {
     ...userConsent,
@@ -33,6 +42,8 @@ export const userConsentsReducer = createReducer(
   })),
   on(getUserConsentsSuccess, (state, { userConsents, pagination }) => ({
     ...state,
+    // We need to generate the given consents text for each user
+    // consent, in order to display it in the table.
     userConsents: userConsents.map(generateGivenConsentsText),
     pagination,
     status: 'success',

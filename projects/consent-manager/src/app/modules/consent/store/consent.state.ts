@@ -8,6 +8,9 @@ export interface ConsentState {
   }
 }
 
+/**
+ * The consent state reducer.
+ */
 export const consentReducers = {
   consentOptions: consentOptionsReducer,
   userConsents: userConsentsReducer,
